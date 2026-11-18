@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <Include>[ezZkvi]*</Include>
+          <!-- Program, Views (Razor), Migrations i Identity Areas se ne testiraju po postavci projekta -->
+          <Exclude>[ezZkvi]Program,[ezZkvi]ezZkvi.Migrations.*,[ezZkvi]AspNetCoreGeneratedDocument.*,[ezZkvi]ezZkvi.Views.*</Exclude>
+          <ExcludeByFile>**/Program.cs,**/Migrations/*.cs,**/Views/**/*.cs,**/Areas/**/*.cs</ExcludeByFile>
+          <ExcludeByAttribute>GeneratedCodeAttribute,ExcludeFromCodeCoverageAttribute</ExcludeByAttribute>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

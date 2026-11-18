@@ -1,0 +1,7 @@
+pitanjeId,odgovorId,ocekivaniTipRezultata,ocekivanoTacno,ocekivaniBodovi
+1,11,JsonResult,1,0.1
+1,12,JsonResult,0,-0.03
+1,,JsonResult,-1,0
+1,999,BadRequestObjectResult,0,0
+1,21,BadRequestObjectResult,0,0
+2,21,BadRequestObjectResult,0,0
