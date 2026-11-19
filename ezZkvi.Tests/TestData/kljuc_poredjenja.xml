@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<slucajevi>
+  <slucaj ulaz="  ALGEBRA  " ocekivano="algebra" />
+  <slucaj ulaz="Linearna    ALGEBRA" ocekivano="linearna algebra" />
+  <slucaj ulaz="Šta je MATRICA?" ocekivano="šta je matrica?" />
+  <slucaj ulaz="ČOKOLADA i Đak" ocekivano="čokolada i đak" />
+  <slucaj ulaz="" ocekivano="" />
+</slucajevi>

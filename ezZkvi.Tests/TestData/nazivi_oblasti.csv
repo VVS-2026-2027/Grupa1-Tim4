@@ -1,0 +1,8 @@
+naziv,kljucTempData,poruka
+"  Geometrija  ",Success,Oblast je uspješno dodana.
+Mehanika,Success,Oblast je uspješno dodana.
+A,Error,Naziv oblasti mora imati između 2 i 100 karaktera.
+"   ",Error,Naziv oblasti mora imati između 2 i 100 karaktera.
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,Error,Naziv oblasti mora imati između 2 i 100 karaktera.
+Algebra!,Error,"Naziv oblasti smije sadržavati samo slova, brojeve i razmake."
+"  ALGEBRA ",Error,Oblast sa istim nazivom već postoji u ovom predmetu.
