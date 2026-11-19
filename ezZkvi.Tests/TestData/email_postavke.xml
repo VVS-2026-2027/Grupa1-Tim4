@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Neispravne SMTP postavke: u svakom slučaju nedostaje tačno jedna obavezna vrijednost. -->
+<postavke>
+  <slucaj opis="nedostaje server"    server=""               port="587" senderEmail="ezkvi@test.ba" username="ezkvi" password="tajna" />
+  <slucaj opis="server samo razmaci" server="   "            port="587" senderEmail="ezkvi@test.ba" username="ezkvi" password="tajna" />
+  <slucaj opis="port je nula"        server="smtp.test.ba"   port="0"   senderEmail="ezkvi@test.ba" username="ezkvi" password="tajna" />
+  <slucaj opis="nedostaje posiljalac" server="smtp.test.ba"  port="587" senderEmail=""              username="ezkvi" password="tajna" />
+  <slucaj opis="nedostaje username"  server="smtp.test.ba"   port="587" senderEmail="ezkvi@test.ba" username=""      password="tajna" />
+  <slucaj opis="nedostaje lozinka"   server="smtp.test.ba"   port="587" senderEmail="ezkvi@test.ba" username="ezkvi" password="" />
+</postavke>
