@@ -120,6 +120,20 @@ public sealed class StudentControllerDashboardTests
 
     [TestMethod]
     [TestProperty("Autor", "Dino Tahirović")]
+    [TestCategory("Boundary verifier")]
+    public async Task Dashboard_ProsjekNaPolaProcenta_ZaokruzujeNavise()
+    {
+        DodajSesiju(_kontekst, status: StatusSesije.ZAVRSEN, brojTacnih: 4, procenat: 80);
+        DodajSesiju(_kontekst, status: StatusSesije.ZAVRSEN, brojTacnih: 4, procenat: 85);
+
+        var model = await Dashboard();
+
+        Assert.AreEqual(83, model.ProsjecanRezultat);
+        Assert.AreEqual(83, model.MojiPredmeti[0].Procenat);
+    }
+
+    [TestMethod]
+    [TestProperty("Autor", "Dino Tahirović")]
     [TestCategory("State verifier")]
     public async Task Dashboard_AktivnaSesija_PrikazujeAktivnuSesiju()
     {

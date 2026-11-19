@@ -479,7 +479,7 @@ public sealed class AdministratorControllerTests
 
         await kontroler.ChangeRole("u1", "Moderator");
 
-        StringAssert.EndsWith((string?)kontroler.TempData["Error"], "ka prilikom uklanjanja stare uloge.");
+        Assert.AreEqual("Greška prilikom uklanjanja stare uloge.", kontroler.TempData["Error"]);
         _userManager.Verify(m => m.AddToRoleAsync(It.IsAny<Korisnik>(), It.IsAny<string>()), Times.Never());
     }
 

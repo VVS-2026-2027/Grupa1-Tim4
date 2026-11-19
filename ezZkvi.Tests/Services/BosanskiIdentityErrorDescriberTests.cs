@@ -136,6 +136,13 @@ public sealed class BosanskiIdentityErrorDescriberTests
     public void ConcurrencyFailure_PodaciIzmijenjeni() =>
         Provjeri(_opisivac.ConcurrencyFailure(), "ConcurrencyFailure", "Podaci su u međuvremenu izmijenjeni. Pokušaj ponovo.");
 
+    /// <summary>Klasa prevodi standardne Identity poruke, pa i poruka da korisnik nije u ulozi treba biti na bosanskom.</summary>
+    [TestMethod]
+    [TestProperty("Autor", "Amir Džafić")]
+    [TestCategory("Equality verifier")]
+    public void UserNotInRole_VracaPorukuNaBosanskom() =>
+        Provjeri(_opisivac.UserNotInRole("Admin"), "UserNotInRole", "Korisnik nije u ulozi 'Admin'.");
+
     [TestMethod]
     [TestProperty("Autor", "Amir Džafić")]
     [TestCategory("Identity verifier")]

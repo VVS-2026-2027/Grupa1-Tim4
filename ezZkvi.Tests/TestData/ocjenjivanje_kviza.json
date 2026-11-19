@@ -1,11 +1,13 @@
 [
-  { "opis": "sve tacno",                 "tacnih": 5, "netacnih": 0, "preskocenih": 0, "ocekivaniPoeni": 0.5,  "ocekivaniProcenat": 100 },
-  { "opis": "3 tacna, 2 netacna",        "tacnih": 3, "netacnih": 2, "preskocenih": 0, "ocekivaniPoeni": 0.24, "ocekivaniProcenat": 48 },
-  { "opis": "2 tacna, 1 netacan, 2 prazna", "tacnih": 2, "netacnih": 1, "preskocenih": 2, "ocekivaniPoeni": 0.17, "ocekivaniProcenat": 34 },
-  { "opis": "4 tacna, 1 netacan",        "tacnih": 4, "netacnih": 1, "preskocenih": 0, "ocekivaniPoeni": 0.37, "ocekivaniProcenat": 74 },
-  { "opis": "negativni zbir se sijece na 0", "tacnih": 1, "netacnih": 4, "preskocenih": 0, "ocekivaniPoeni": 0.0, "ocekivaniProcenat": 0 },
-  { "opis": "sve netacno",               "tacnih": 0, "netacnih": 5, "preskocenih": 0, "ocekivaniPoeni": 0.0,  "ocekivaniProcenat": 0 },
-  { "opis": "sve preskoceno",            "tacnih": 0, "netacnih": 0, "preskocenih": 5, "ocekivaniPoeni": 0.0,  "ocekivaniProcenat": 0 },
-  { "opis": "jedno pitanje, tacno",      "tacnih": 1, "netacnih": 0, "preskocenih": 0, "ocekivaniPoeni": 0.1,  "ocekivaniProcenat": 100 },
-  { "opis": "3 pitanja, 2 tacna",        "tacnih": 2, "netacnih": 0, "preskocenih": 1, "ocekivaniPoeni": 0.2,  "ocekivaniProcenat": 67 }
+  {"opis": "sve tacno", "tacnih": 5, "netacnih": 0, "preskocenih": 0, "ocekivaniPoeni": 0.5, "ocekivaniProcenat": 100},
+  {"opis": "3 tacna, 2 netacna", "tacnih": 3, "netacnih": 2, "preskocenih": 0, "ocekivaniPoeni": 0.24, "ocekivaniProcenat": 48},
+  {"opis": "2 tacna, 1 netacan, 2 prazna", "tacnih": 2, "netacnih": 1, "preskocenih": 2, "ocekivaniPoeni": 0.17, "ocekivaniProcenat": 34},
+  {"opis": "4 tacna, 1 netacan", "tacnih": 4, "netacnih": 1, "preskocenih": 0, "ocekivaniPoeni": 0.37, "ocekivaniProcenat": 74},
+  {"opis": "negativni zbir se sijece na 0", "tacnih": 1, "netacnih": 4, "preskocenih": 0, "ocekivaniPoeni": 0.0, "ocekivaniProcenat": 0},
+  {"opis": "sve netacno", "tacnih": 0, "netacnih": 5, "preskocenih": 0, "ocekivaniPoeni": 0.0, "ocekivaniProcenat": 0},
+  {"opis": "sve preskoceno", "tacnih": 0, "netacnih": 0, "preskocenih": 5, "ocekivaniPoeni": 0.0, "ocekivaniProcenat": 0},
+  {"opis": "jedno pitanje, tacno", "tacnih": 1, "netacnih": 0, "preskocenih": 0, "ocekivaniPoeni": 0.1, "ocekivaniProcenat": 100},
+  {"opis": "3 pitanja, 2 tacna", "tacnih": 2, "netacnih": 0, "preskocenih": 1, "ocekivaniPoeni": 0.2, "ocekivaniProcenat": 67},
+  {"opis": "4 pitanja: 2 tacna, 1 netacan, 1 preskocen (42,5 % se zaokruzuje na 43)", "tacnih": 2, "netacnih": 1, "preskocenih": 1, "ocekivaniPoeni": 0.17, "ocekivaniProcenat": 43},
+  {"opis": "4 pitanja: 1 tacan, 3 netacna (2,5 % se zaokruzuje na 3)", "tacnih": 1, "netacnih": 3, "preskocenih": 0, "ocekivaniPoeni": 0.01, "ocekivaniProcenat": 3}
 ]

@@ -354,6 +354,24 @@ public sealed class PredmetControllerTests
         Assert.AreEqual(ocekivanaPoruka, kontroler.TempData["Error"]);
     }
 
+    /// <summary>
+    /// Predmet "Osnove  Programiranja" (dva razmaka) i novi "osnove programiranja" su isti naziv
+    /// nakon normalizacije, pa novi predmet ne smije biti dodan kao duplikat.
+    /// </summary>
+    [TestMethod]
+    [TestProperty("Autor", "Imran Čustović")]
+    [TestCategory("Equality verifier")]
+    public async Task CreateFromContent_PostojeciNazivSaViseRazmaka_OdbijaDuplikat()
+    {
+        _kontekst.Predmet.Add(new Predmet { Id = 9, Naziv = "Osnove  Programiranja" });
+        TestDbFactory.Snimi(_kontekst);
+        var kontroler = Kontroler();
+
+        await kontroler.CreateFromContent(new Predmet { Naziv = "osnove programiranja" });
+
+        Assert.AreEqual("Predmet sa istim nazivom već postoji.", kontroler.TempData["Error"]);
+    }
+
     [TestMethod]
     [TestProperty("Autor", "Imran Čustović")]
     [TestCategory("State verifier")]

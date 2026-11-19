@@ -1,9 +1,11 @@
 [
-  { "opis": "email nije potvrdjen", "emailPotvrdjen": false, "odobren": true,  "lozinkaIspravna": true,  "uloga": "Student",   "ocekivaniKontroler": "",              "ocekivanaAkcija": "",          "ocekivanaGreska": "Morate potvrditi email adresu prije prijave." },
-  { "opis": "nalog nije odobren",   "emailPotvrdjen": true,  "odobren": false, "lozinkaIspravna": true,  "uloga": "Student",   "ocekivaniKontroler": "",              "ocekivanaAkcija": "",          "ocekivanaGreska": "Vaš nalog još nije odobren od strane administratora." },
-  { "opis": "pogresna lozinka",     "emailPotvrdjen": true,  "odobren": true,  "lozinkaIspravna": false, "uloga": "Student",   "ocekivaniKontroler": "",              "ocekivanaAkcija": "",          "ocekivanaGreska": "Pogrešan email ili lozinka." },
-  { "opis": "admin",                "emailPotvrdjen": true,  "odobren": true,  "lozinkaIspravna": true,  "uloga": "Admin",     "ocekivaniKontroler": "Administrator", "ocekivanaAkcija": "Dashboard", "ocekivanaGreska": "" },
-  { "opis": "moderator",            "emailPotvrdjen": true,  "odobren": true,  "lozinkaIspravna": true,  "uloga": "Moderator", "ocekivaniKontroler": "Moderator",     "ocekivanaAkcija": "Dashboard", "ocekivanaGreska": "" },
-  { "opis": "student",              "emailPotvrdjen": true,  "odobren": true,  "lozinkaIspravna": true,  "uloga": "Student",   "ocekivaniKontroler": "Student",       "ocekivanaAkcija": "Dashboard", "ocekivanaGreska": "" },
-  { "opis": "korisnik bez uloge",   "emailPotvrdjen": true,  "odobren": true,  "lozinkaIspravna": true,  "uloga": "",          "ocekivaniKontroler": "Home",          "ocekivanaAkcija": "Index",     "ocekivanaGreska": "" }
+  {"opis": "email nije potvrdjen", "emailPotvrdjen": false, "odobren": true, "lozinkaIspravna": true, "uloga": "Student", "ocekivaniKontroler": "", "ocekivanaAkcija": "", "ocekivanaGreska": "Morate potvrditi email adresu prije prijave."},
+  {"opis": "nalog nije odobren", "emailPotvrdjen": true, "odobren": false, "lozinkaIspravna": true, "uloga": "Student", "ocekivaniKontroler": "", "ocekivanaAkcija": "", "ocekivanaGreska": "Vaš nalog još nije odobren od strane administratora."},
+  {"opis": "pogresna lozinka", "emailPotvrdjen": true, "odobren": true, "lozinkaIspravna": false, "uloga": "Student", "ocekivaniKontroler": "", "ocekivanaAkcija": "", "ocekivanaGreska": "Pogrešan email ili lozinka."},
+  {"opis": "nepotvrdjen email i pogresna lozinka: bez otkrivanja stanja naloga", "emailPotvrdjen": false, "odobren": true, "lozinkaIspravna": false, "uloga": "Student", "ocekivaniKontroler": "", "ocekivanaAkcija": "", "ocekivanaGreska": "Pogrešan email ili lozinka."},
+  {"opis": "neodobren nalog i pogresna lozinka: bez otkrivanja stanja naloga", "emailPotvrdjen": true, "odobren": false, "lozinkaIspravna": false, "uloga": "Student", "ocekivaniKontroler": "", "ocekivanaAkcija": "", "ocekivanaGreska": "Pogrešan email ili lozinka."},
+  {"opis": "admin", "emailPotvrdjen": true, "odobren": true, "lozinkaIspravna": true, "uloga": "Admin", "ocekivaniKontroler": "Administrator", "ocekivanaAkcija": "Dashboard", "ocekivanaGreska": ""},
+  {"opis": "moderator", "emailPotvrdjen": true, "odobren": true, "lozinkaIspravna": true, "uloga": "Moderator", "ocekivaniKontroler": "Moderator", "ocekivanaAkcija": "Dashboard", "ocekivanaGreska": ""},
+  {"opis": "student", "emailPotvrdjen": true, "odobren": true, "lozinkaIspravna": true, "uloga": "Student", "ocekivaniKontroler": "Student", "ocekivanaAkcija": "Dashboard", "ocekivanaGreska": ""},
+  {"opis": "korisnik bez uloge", "emailPotvrdjen": true, "odobren": true, "lozinkaIspravna": true, "uloga": "", "ocekivaniKontroler": "Home", "ocekivanaAkcija": "Index", "ocekivanaGreska": ""}
 ]

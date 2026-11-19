@@ -144,6 +144,24 @@ public sealed class OblastControllerTests
         Assert.AreEqual(ocekivanaPoruka, kontroler.TempData[kljucTempData]);
     }
 
+    /// <summary>
+    /// Oblast "Linearna  Algebra" (dva razmaka, npr. iz starijih podataka) i nova "linearna algebra"
+    /// su isti naziv nakon normalizacije, pa nova oblast ne smije biti dodana kao duplikat.
+    /// </summary>
+    [TestMethod]
+    [TestProperty("Autor", "Imran Čustović")]
+    [TestCategory("Equality verifier")]
+    public async Task CreateFromContent_PostojeciNazivSaViseRazmaka_OdbijaDuplikat()
+    {
+        _kontekst.Oblast.Add(new Oblast { Id = 8, Naziv = "Linearna  Algebra", PredmetId = 1 });
+        TestDbFactory.Snimi(_kontekst);
+        var kontroler = Kontroler();
+
+        await kontroler.CreateFromContent(1, "linearna algebra");
+
+        Assert.AreEqual("Oblast sa istim nazivom već postoji u ovom predmetu.", kontroler.TempData["Error"]);
+    }
+
     // ---------- EditFromContent ----------
 
     [TestMethod]

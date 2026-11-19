@@ -283,25 +283,22 @@ public sealed class StudentControllerPredajaTests
     }
 
     /// <summary>
-    /// Kad vrijeme istekne prije predaje, sesija se zatvori pri spašavanju odgovora (stavke se brišu),
-    /// pa druga obrada ne nađe stavke i student dobije poruku umjesto rezultata.
-    /// Test dokumentuje trenutno ponašanje aplikacije.
+    /// Kad vrijeme istekne, forma se automatski preda (tajmer u pogledu). Student tada treba vidjeti rezultat,
+    /// sesija treba biti označena kao istekla, a odgovor koji nije potvrđen prije isteka se ne boduje.
     /// </summary>
     [TestMethod]
     [TestProperty("Autor", "Dino Tahirović")]
     [TestCategory("State verifier")]
-    public async Task SubmitSimulation_IsteklaSesija_ZatvaraSesijuIPreusmjeravaBezRezultata()
+    public async Task SubmitSimulation_IsteklaSesija_VracaRezultatIStatusIstekao()
     {
         var sesijaId = AktivnaSesijaSaPetPitanja(minutaOdPocetka: 10);
-        var kontroler = Kontroler();
 
-        var rezultat = await kontroler.SubmitSimulation(Predaja(sesijaId, (1, TacanOdgovor(1))));
+        var rezultat = await Kontroler().SubmitSimulation(Predaja(sesijaId, (1, TacanOdgovor(1))));
 
         var sesija = await _kontekst.KvizSesije.SingleAsync();
-        Assert.IsInstanceOfType(rezultat, typeof(RedirectToActionResult));
-        Assert.AreEqual("Sesija simulacije nije pronađena.", kontroler.TempData["SimulationError"]);
+        Assert.AreEqual(5, RezultatIz(rezultat).Neodgovorenih);
+        Assert.AreEqual(0, RezultatIz(rezultat).TacnihOdgovora);
         Assert.AreEqual(StatusSesije.ISTEKAO, sesija.Status);
-        Assert.AreEqual(0, sesija.BrojTacnih);
     }
 
     [TestMethod]

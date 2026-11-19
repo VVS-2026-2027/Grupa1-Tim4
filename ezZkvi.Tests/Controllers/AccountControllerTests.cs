@@ -168,6 +168,24 @@ public sealed class AccountControllerTests
         Assert.AreEqual(ocekivanaGreska, Rezultat.PrvaGreska(kontroler.ModelState));
     }
 
+    /// <summary>
+    /// Zaštita od pogađanja lozinke: neuspjele prijave trebaju se brojati i nalog privremeno zaključati.
+    /// </summary>
+    [TestMethod]
+    [TestProperty("Autor", "Amir Džafić")]
+    [TestCategory("Internal call verifier")]
+    public async Task LoginPost_PogresnaLozinka_KoristiZakljucavanjeNaloga()
+    {
+        var korisnik = new Korisnik { Id = "u1", UserName = "ana", Email = Email, EmailConfirmed = true, IsApproved = true };
+        _userManager.Setup(m => m.FindByEmailAsync(Email)).ReturnsAsync(korisnik);
+        _signInManager.Setup(m => m.PasswordSignInAsync("ana", "pogresna", false, It.IsAny<bool>()))
+            .ReturnsAsync(IdentityMockovi.RezultatPrijave(false));
+
+        await Kontroler().Login(new LoginViewModel { Email = Email, Password = "pogresna" });
+
+        _signInManager.Verify(m => m.PasswordSignInAsync("ana", "pogresna", false, true), Times.Once());
+    }
+
     // ---------- Register (GET/POST) ----------
 
     [TestMethod]
