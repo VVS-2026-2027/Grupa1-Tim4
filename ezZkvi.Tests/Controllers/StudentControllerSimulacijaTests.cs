@@ -124,7 +124,7 @@ public sealed class StudentControllerSimulacijaTests
         Assert.AreEqual(1, model.Result.TacnihOdgovora);
         Assert.AreEqual(2, model.BrojPitanja);
         Assert.AreEqual(StatusSesije.ISTEKAO, (await _kontekst.KvizSesije.SingleAsync()).Status);
-        Assert.AreEqual(0, await _kontekst.KvizSesijaPitanja.CountAsync());
+        Assert.AreEqual(2, await _kontekst.KvizSesijaPitanja.CountAsync());
     }
 
     // ---------- StartSimulation: validacija ulaza ----------

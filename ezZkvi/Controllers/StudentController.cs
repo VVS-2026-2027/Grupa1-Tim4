@@ -484,8 +484,7 @@ namespace ezZkvi.Controllers
 
                 await AzurirajStudentStatistikuAsync(sesija, ukupno, tacno);
 
-                _context.KvizSesijaPitanja.RemoveRange(stavke);
-
+                // Odgovori se čuvaju i poslije predaje: potrebni su za preporuku oblasti za ponavljanje (Task 3).
                 await _context.SaveChangesAsync();
             }
 

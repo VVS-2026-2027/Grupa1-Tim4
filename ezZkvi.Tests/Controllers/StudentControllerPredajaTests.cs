@@ -123,7 +123,7 @@ public sealed class StudentControllerPredajaTests
     [TestMethod]
     [TestProperty("Autor", "Dino Tahirović")]
     [TestCategory("State verifier")]
-    public async Task SubmitSimulation_TacanOdgovorNaPrvoPitanje_ZatvaraSesijuIBriseStavke()
+    public async Task SubmitSimulation_TacanOdgovorNaPrvoPitanje_ZatvaraSesijuIZadrzavaOdgovore()
     {
         var sesijaId = AktivnaSesijaSaPetPitanja();
 
@@ -133,7 +133,7 @@ public sealed class StudentControllerPredajaTests
         Assert.AreEqual(StatusSesije.ZAVRSEN, sesija.Status);
         Assert.AreEqual(1, sesija.BrojTacnih);
         Assert.AreEqual(20, sesija.Procenat);
-        Assert.AreEqual(0, await _kontekst.KvizSesijaPitanja.CountAsync());
+        Assert.AreEqual(5, await _kontekst.KvizSesijaPitanja.CountAsync());
     }
 
     [TestMethod]
