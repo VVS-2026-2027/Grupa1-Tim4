@@ -1,3 +1,5 @@
+using ezZkvi.Models;
+
 namespace ezZkvi.ViewModels
 {
     public class DashboardViewModel
@@ -26,6 +28,9 @@ namespace ezZkvi.ViewModels
         // Niz dana učenja (Task 3, funkcionalnost 1)
         public int TrenutniNizDana { get; set; }
         public int NajduziNizDana { get; set; }
+
+        // Oblasti preporučene za ponavljanje (Task 3, funkcionalnost 2)
+        public List<PreporukaOblasti> PreporukeZaPonavljanje { get; set; } = new();
     }
 
     public class NedavnaAktivnostViewModel

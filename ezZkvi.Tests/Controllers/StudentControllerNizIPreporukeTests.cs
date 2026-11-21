@@ -50,4 +50,20 @@ public sealed class StudentControllerNizIPreporukeTests
         Assert.AreEqual(2, model.TrenutniNizDana);
         Assert.AreEqual(2, model.NajduziNizDana);
     }
+
+    [TestMethod]
+    [TestProperty("Autor", "Dino Tahirović")]
+    [TestCategory("State verifier")]
+    public async Task Dashboard_SlabaOblastUZavrsenomKvizu_PreporucujeOblastZaPonavljanje()
+    {
+        var sesijaId = SesijaSaStanjimaOdgovora(_kontekst, tacnih: 2, netacnih: 3, preskocenih: 0);
+        _kontekst.KvizSesije.Find(sesijaId)!.Status = StatusSesije.ZAVRSEN;
+        TestDbFactory.Snimi(_kontekst);
+
+        var model = await Dashboard();
+
+        Assert.AreEqual(1, model.PreporukeZaPonavljanje.Count);
+        Assert.AreEqual("Algebra", model.PreporukeZaPonavljanje[0].Naziv);
+        Assert.AreEqual(40, model.PreporukeZaPonavljanje[0].Tacnost);
+    }
 }
