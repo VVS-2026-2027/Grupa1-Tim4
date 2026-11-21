@@ -438,6 +438,24 @@
       </div>
     </div>
 
+    <div class="section-card" style="margin-bottom:20px">
+      <div class="section-title">Niz dana učenja 🔥</div>
+      <div class="activity-item">
+        <div class="activity-info">
+          <div class="activity-name">Trenutni niz</div>
+          <div class="activity-time">Uzastopni dani sa završenim kvizom</div>
+        </div>
+        <div class="activity-score">@Model.TrenutniNizDana @(Model.TrenutniNizDana == 1 ? "dan" : "dana")</div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-info">
+          <div class="activity-name">Najduži niz</div>
+          <div class="activity-time">Tvoj rekord</div>
+        </div>
+        <div class="activity-score">@Model.NajduziNizDana @(Model.NajduziNizDana == 1 ? "dan" : "dana")</div>
+      </div>
+    </div>
+
     <div class="section-card">
       <div class="section-title">Moji predmeti</div>
       @if (!Model.MojiPredmeti.Any())

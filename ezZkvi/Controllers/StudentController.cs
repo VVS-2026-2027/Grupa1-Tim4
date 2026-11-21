@@ -1,5 +1,6 @@
 using ezZkvi.Data;
 using ezZkvi.Models;
+using ezZkvi.Services;
 using ezZkvi.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace ezZkvi.Controllers
     public class StudentController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly NizDanaService _nizDana = new();
 
         private const int SistemskiBrojPitanja = 5;
         private const int VremenskoOgranicenjeMinuta = 3;
@@ -656,6 +658,10 @@ namespace ezZkvi.Controllers
                     BrojPitanja = brojPitanjaPoPredmetu.TryGetValue(g.Key.Id, out var b) ? b : 0
                 })
                 .ToList();
+
+            // Niz dana učenja (Task 3, funkcionalnost 1)
+            model.TrenutniNizDana = _nizDana.IzracunajTrenutniNiz(sesije, DateTime.UtcNow);
+            model.NajduziNizDana = _nizDana.IzracunajNajduziNiz(sesije);
 
             return View(model);
         }
