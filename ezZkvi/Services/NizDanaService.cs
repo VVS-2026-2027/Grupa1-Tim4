@@ -10,7 +10,8 @@ namespace ezZkvi.Services
         public int IzracunajTrenutniNiz(IEnumerable<KvizSesija> sesije, DateTime danas)
         {
             var dani = DaniSaZavrsenimKvizom(sesije);
-            return BrojUzastopnihDanaDo(dani, danas.Date);
+            var posljednjiDan = dani.Contains(danas.Date) ? danas.Date : danas.Date.AddDays(-1);
+            return BrojUzastopnihDanaDo(dani, posljednjiDan);
         }
 
         private static HashSet<DateTime> DaniSaZavrsenimKvizom(IEnumerable<KvizSesija> sesije)
