@@ -26,6 +26,11 @@ public sealed class NizDanaServiceTests
         return new KvizSesija { Status = status, DatumZavrsetka = Danas.AddDays(-danaUnazad) };
     }
 
+    private static List<KvizSesija> Sesije(params int[] daniUnazad)
+    {
+        return daniUnazad.Select(d => Sesija(d)).ToList();
+    }
+
     [TestMethod]
     [TestProperty("Autor", "Dino Tahirović")]
     [TestCategory("Boundary verifier")]
@@ -36,5 +41,19 @@ public sealed class NizDanaServiceTests
         var niz = _servis.IzracunajTrenutniNiz(sesije, Danas);
 
         Assert.AreEqual(0, niz);
+    }
+
+    [TestMethod]
+    [TestProperty("Autor", "Dino Tahirović")]
+    [TestCategory("Equality verifier")]
+    [DataRow(new[] { 0 }, 1, DisplayName = "Samo danas")]
+    [DataRow(new[] { 0, 1, 2 }, 3, DisplayName = "Tri dana zaredom")]
+    [DataRow(new[] { 0, 0, 1 }, 2, DisplayName = "Dva kviza danas se broje kao jedan dan")]
+    [DataRow(new[] { 0, 1, 3, 4 }, 2, DisplayName = "Preskocen dan prekida niz")]
+    public void IzracunajTrenutniNiz_ZavrseniKvizovi_BrojiUzastopneDane(int[] daniUnazad, int ocekivano)
+    {
+        var niz = _servis.IzracunajTrenutniNiz(Sesije(daniUnazad), Danas);
+
+        Assert.AreEqual(ocekivano, niz);
     }
 }
