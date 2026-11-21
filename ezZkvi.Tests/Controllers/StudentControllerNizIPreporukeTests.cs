@@ -30,10 +30,14 @@ public sealed class StudentControllerNizIPreporukeTests
         _kontekst.Dispose();
     }
 
+    private StudentController Kontroler()
+    {
+        return KontrolerHelper.SaKorisnikom(new StudentController(_kontekst), StudentId, "Student");
+    }
+
     private async Task<DashboardViewModel> Dashboard()
     {
-        var kontroler = KontrolerHelper.SaKorisnikom(new StudentController(_kontekst), StudentId, "Student");
-        var rezultat = await kontroler.Dashboard();
+        var rezultat = await Kontroler().Dashboard();
         return Rezultat.Kao<DashboardViewModel>(Rezultat.Kao<ViewResult>(rezultat).Model);
     }
 
@@ -65,5 +69,19 @@ public sealed class StudentControllerNizIPreporukeTests
         Assert.AreEqual(1, model.PreporukeZaPonavljanje.Count);
         Assert.AreEqual("Algebra", model.PreporukeZaPonavljanje[0].Naziv);
         Assert.AreEqual(40, model.PreporukeZaPonavljanje[0].Tacnost);
+    }
+
+    [TestMethod]
+    [TestProperty("Autor", "Imran Čustović")]
+    [TestCategory("State verifier")]
+    public async Task Dashboard_PredanaSimulacijaSaSlabimRezultatom_PreporucujeOblast()
+    {
+        var sesijaId = SesijaSaStanjimaOdgovora(_kontekst, tacnih: 1, netacnih: 4, preskocenih: 0);
+        await Kontroler().SubmitSimulation(new SimulacijaSubmitViewModel { KvizSesijaId = sesijaId });
+
+        var model = await Dashboard();
+
+        Assert.AreEqual(1, model.PreporukeZaPonavljanje.Count);
+        Assert.AreEqual(20, model.PreporukeZaPonavljanje[0].Tacnost);
     }
 }
