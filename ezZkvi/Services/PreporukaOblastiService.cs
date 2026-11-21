@@ -8,29 +8,33 @@ namespace ezZkvi.Services
     /// </summary>
     public class PreporukaOblastiService
     {
+        private const int PragTacnosti = 60;
+
         public List<PreporukaOblasti> OblastiZaPonavljanje(IEnumerable<KvizSesijaPitanje> stavke)
         {
-            var rezultat = new List<PreporukaOblasti>();
+            return stavke
+                .GroupBy(s => s.Pitanje!.OblastId)
+                .Select(NapraviPreporuku)
+                .Where(p => p.Tacnost < PragTacnosti)
+                .ToList();
+        }
 
-            foreach (var grupa in stavke.GroupBy(s => s.Pitanje!.OblastId))
+        private static PreporukaOblasti NapraviPreporuku(IGrouping<int, KvizSesijaPitanje> grupa)
+        {
+            var ukupno = grupa.Count();
+            return new PreporukaOblasti
             {
-                var ukupno = grupa.Count();
-                var tacnih = grupa.Count(s => s.Tacno == 1);
-                var tacnost = tacnih * 100 / ukupno;
+                OblastId = grupa.Key,
+                Naziv = grupa.First().Pitanje!.Oblast?.Naziv ?? string.Empty,
+                BrojOdgovora = ukupno,
+                Tacnost = grupa.Count(JeTacna) * 100 / ukupno
+            };
+        }
 
-                if (tacnost < 60)
-                {
-                    rezultat.Add(new PreporukaOblasti
-                    {
-                        OblastId = grupa.Key,
-                        Naziv = grupa.First().Pitanje!.Oblast?.Naziv ?? string.Empty,
-                        BrojOdgovora = ukupno,
-                        Tacnost = tacnost
-                    });
-                }
-            }
-
-            return rezultat;
+        /// <summary>Tačan odgovor ima oznaku 1; netačan 0, a preskočeno pitanje -1, pa se oba računaju kao netačna.</summary>
+        private static bool JeTacna(KvizSesijaPitanje stavka)
+        {
+            return stavka.Tacno == 1;
         }
     }
 }
