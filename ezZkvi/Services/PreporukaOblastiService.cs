@@ -17,6 +17,9 @@ namespace ezZkvi.Services
                 .GroupBy(s => s.Pitanje!.OblastId)
                 .Select(NapraviPreporuku)
                 .Where(p => p.BrojOdgovora >= MinimalnoOdgovora && p.Tacnost < PragTacnosti)
+                .OrderBy(p => p.Tacnost)
+                .ThenByDescending(p => p.BrojOdgovora)
+                .Take(3)
                 .ToList();
         }
 
