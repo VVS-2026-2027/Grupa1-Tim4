@@ -9,18 +9,30 @@ namespace ezZkvi.Services
     {
         public int IzracunajTrenutniNiz(IEnumerable<KvizSesija> sesije, DateTime danas)
         {
-            var dani = sesije
-                .Where(s => s.Status == StatusSesije.ZAVRSEN || s.Status == StatusSesije.ISTEKAO)
-                .Select(s => s.DatumZavrsetka.Date)
-                .Distinct()
-                .ToList();
+            var dani = DaniSaZavrsenimKvizom(sesije);
+            return BrojUzastopnihDanaDo(dani, danas.Date);
+        }
 
+        private static HashSet<DateTime> DaniSaZavrsenimKvizom(IEnumerable<KvizSesija> sesije)
+        {
+            return sesije
+                .Where(JeZavrsena)
+                .Select(s => s.DatumZavrsetka.Date)
+                .ToHashSet();
+        }
+
+        private static bool JeZavrsena(KvizSesija sesija)
+        {
+            return sesija.Status == StatusSesije.ZAVRSEN || sesija.Status == StatusSesije.ISTEKAO;
+        }
+
+        /// <summary>Broji uzastopne dane unazad, počevši od zadanog dana.</summary>
+        private static int BrojUzastopnihDanaDo(HashSet<DateTime> dani, DateTime posljednjiDan)
+        {
             var niz = 0;
-            var dan = danas.Date;
-            while (dani.Contains(dan))
+            while (dani.Contains(posljednjiDan.AddDays(-niz)))
             {
                 niz++;
-                dan = dan.AddDays(-1);
             }
 
             return niz;
