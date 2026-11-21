@@ -16,7 +16,14 @@ namespace ezZkvi.Services
 
         public int IzracunajNajduziNiz(IEnumerable<KvizSesija> sesije)
         {
-            throw new NotImplementedException();
+            var dani = DaniSaZavrsenimKvizom(sesije);
+            var najduzi = 0;
+            foreach (var dan in dani)
+            {
+                najduzi = Math.Max(najduzi, BrojUzastopnihDanaDo(dani, dan));
+            }
+
+            return najduzi;
         }
 
         private static HashSet<DateTime> DaniSaZavrsenimKvizom(IEnumerable<KvizSesija> sesije)
