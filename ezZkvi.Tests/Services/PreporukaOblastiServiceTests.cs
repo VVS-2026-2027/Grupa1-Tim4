@@ -72,4 +72,19 @@ public sealed class PreporukaOblastiServiceTests
 
         Assert.AreEqual(ocekivanoPreporuceno, preporuke.Any(p => p.OblastId == 1));
     }
+
+    [TestMethod]
+    [TestProperty("Autor", "Dino Tahirović")]
+    [TestCategory("Equality verifier")]
+    public void OblastiZaPonavljanje_CetiriSlabeOblasti_VracaTriNajslabijeRedom()
+    {
+        var stavke = Stavke(1, tacnih: 2, netacnih: 3)       // 40 %, 5 odgovora
+            .Concat(Stavke(2, tacnih: 0, netacnih: 5))       // 0 %
+            .Concat(Stavke(3, tacnih: 4, netacnih: 6))       // 40 %, 10 odgovora
+            .Concat(Stavke(4, tacnih: 5, netacnih: 5));      // 50 %
+
+        var preporuke = _servis.OblastiZaPonavljanje(stavke);
+
+        CollectionAssert.AreEqual(new[] { 2, 3, 1 }, preporuke.Select(p => p.OblastId).ToArray());
+    }
 }
