@@ -7,6 +7,10 @@ namespace ezZkvi.Services
     /// </summary>
     public class NizDanaService
     {
+        /// <summary>
+        /// Trenutni niz: broji se unazad od danas, a ako danas još nema kviza, od jučer
+        /// (dan još nije gotov, pa niz nije prekinut).
+        /// </summary>
         public int IzracunajTrenutniNiz(IEnumerable<KvizSesija> sesije, DateTime danas)
         {
             var dani = DaniSaZavrsenimKvizom(sesije);
@@ -14,16 +18,18 @@ namespace ezZkvi.Services
             return BrojUzastopnihDanaDo(dani, posljednjiDan);
         }
 
+        /// <summary>
+        /// Najduži niz u historiji: broji se samo od dana kojima niz završava
+        /// (sljedeći dan nema kviza), pa se svaki niz prođe tačno jednom.
+        /// </summary>
         public int IzracunajNajduziNiz(IEnumerable<KvizSesija> sesije)
         {
             var dani = DaniSaZavrsenimKvizom(sesije);
-            var najduzi = 0;
-            foreach (var dan in dani)
-            {
-                najduzi = Math.Max(najduzi, BrojUzastopnihDanaDo(dani, dan));
-            }
-
-            return najduzi;
+            return dani
+                .Where(dan => !dani.Contains(dan.AddDays(1)))
+                .Select(krajNiza => BrojUzastopnihDanaDo(dani, krajNiza))
+                .DefaultIfEmpty(0)
+                .Max();
         }
 
         private static HashSet<DateTime> DaniSaZavrsenimKvizom(IEnumerable<KvizSesija> sesije)
