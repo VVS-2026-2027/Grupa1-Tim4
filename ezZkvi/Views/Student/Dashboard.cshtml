@@ -456,6 +456,31 @@
       </div>
     </div>
 
+    <div class="section-card" style="margin-bottom:20px">
+      <div class="section-title">Preporučeno za ponavljanje</div>
+      @if (!Model.PreporukeZaPonavljanje.Any())
+      {
+        <div class="no-results">
+          <div class="ico">✅</div>
+          <p>Nema slabih oblasti, samo nastavi!</p>
+        </div>
+      }
+      else
+      {
+        @foreach (var preporuka in Model.PreporukeZaPonavljanje)
+        {
+          <div class="activity-item">
+            <div class="activity-dot amber"></div>
+            <div class="activity-info">
+              <div class="activity-name">@preporuka.Naziv</div>
+              <div class="activity-time">@preporuka.BrojOdgovora odgovora u završenim kvizovima</div>
+            </div>
+            <div class="activity-score">@preporuka.Tacnost%</div>
+          </div>
+        }
+      }
+    </div>
+
     <div class="section-card">
       <div class="section-title">Moji predmeti</div>
       @if (!Model.MojiPredmeti.Any())

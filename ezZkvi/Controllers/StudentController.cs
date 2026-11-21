@@ -15,6 +15,7 @@ namespace ezZkvi.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly NizDanaService _nizDana = new();
+        private readonly PreporukaOblastiService _preporuke = new();
 
         private const int SistemskiBrojPitanja = 5;
         private const int VremenskoOgranicenjeMinuta = 3;
@@ -662,6 +663,15 @@ namespace ezZkvi.Controllers
             // Niz dana učenja (Task 3, funkcionalnost 1)
             model.TrenutniNizDana = _nizDana.IzracunajTrenutniNiz(sesije, DateTime.UtcNow);
             model.NajduziNizDana = _nizDana.IzracunajNajduziNiz(sesije);
+
+            // Preporuka oblasti za ponavljanje (Task 3, funkcionalnost 2)
+            var idZavrsenihSesija = sesije.Select(s => s.ID).ToList();
+            var stavkeZavrsenihKvizova = await _context.KvizSesijaPitanja
+                .Include(s => s.Pitanje)
+                    .ThenInclude(p => p!.Oblast)
+                .Where(s => idZavrsenihSesija.Contains(s.KvizSesijaId))
+                .ToListAsync();
+            model.PreporukeZaPonavljanje = _preporuke.OblastiZaPonavljanje(stavkeZavrsenihKvizova);
 
             return View(model);
         }
