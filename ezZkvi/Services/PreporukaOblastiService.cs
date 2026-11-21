@@ -8,19 +8,33 @@ namespace ezZkvi.Services
     /// </summary>
     public class PreporukaOblastiService
     {
+        /// <summary>Oblast se preporučuje kad je tačnost strogo manja od ovog praga (u procentima).</summary>
         private const int PragTacnosti = 60;
+
+        /// <summary>Sa manje odgovora tačnost nije pouzdana, pa se oblast ne preporučuje.</summary>
         private const int MinimalnoOdgovora = 5;
 
+        private const int MaksimalnoPreporuka = 3;
+
+        /// <summary>
+        /// Vraća najviše tri najslabije oblasti: prvo po tačnosti, a kod iste tačnosti
+        /// prednost ima oblast sa više odgovora (rezultat je pouzdaniji).
+        /// </summary>
         public List<PreporukaOblasti> OblastiZaPonavljanje(IEnumerable<KvizSesijaPitanje> stavke)
         {
             return stavke
                 .GroupBy(s => s.Pitanje!.OblastId)
                 .Select(NapraviPreporuku)
-                .Where(p => p.BrojOdgovora >= MinimalnoOdgovora && p.Tacnost < PragTacnosti)
+                .Where(TrebaPonoviti)
                 .OrderBy(p => p.Tacnost)
                 .ThenByDescending(p => p.BrojOdgovora)
-                .Take(3)
+                .Take(MaksimalnoPreporuka)
                 .ToList();
+        }
+
+        private static bool TrebaPonoviti(PreporukaOblasti preporuka)
+        {
+            return preporuka.BrojOdgovora >= MinimalnoOdgovora && preporuka.Tacnost < PragTacnosti;
         }
 
         private static PreporukaOblasti NapraviPreporuku(IGrouping<int, KvizSesijaPitanje> grupa)
