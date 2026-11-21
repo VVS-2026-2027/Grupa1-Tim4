@@ -1,5 +1,6 @@
 using ezZkvi.Models;
 using ezZkvi.Services;
+using ezZkvi.Tests.Infrastruktura;
 
 namespace ezZkvi.Tests.Services;
 
@@ -11,6 +12,10 @@ namespace ezZkvi.Tests.Services;
 public sealed class NizDanaServiceTests
 {
     private static readonly DateTime Danas = new(2026, 11, 21, 15, 0, 0);
+
+    /// <summary>CSV: dani unazad (odvojeni sa ;) i očekivani najduži niz.</summary>
+    public static IEnumerable<object[]> NajduziNizIzCsv =>
+        TestPodaci.Csv("najduzi_niz.csv").Select(red => new object[] { Dani(red[0]), TestPodaci.Int(red[1]) });
 
     private NizDanaService _servis = null!;
 
@@ -29,6 +34,13 @@ public sealed class NizDanaServiceTests
     private static List<KvizSesija> Sesije(params int[] daniUnazad)
     {
         return daniUnazad.Select(d => Sesija(d)).ToList();
+    }
+
+    private static int[] Dani(string tekst)
+    {
+        return string.IsNullOrWhiteSpace(tekst)
+            ? Array.Empty<int>()
+            : tekst.Split(';').Select(TestPodaci.Int).ToArray();
     }
 
     [TestMethod]
@@ -65,6 +77,17 @@ public sealed class NizDanaServiceTests
     public void IzracunajTrenutniNiz_DanasJosNemaKviza_NizSeRacunaOdJucer(int[] daniUnazad, int ocekivano)
     {
         var niz = _servis.IzracunajTrenutniNiz(Sesije(daniUnazad), Danas);
+
+        Assert.AreEqual(ocekivano, niz);
+    }
+
+    [TestMethod]
+    [TestProperty("Autor", "Amir Džafić")]
+    [TestCategory("Equality verifier")]
+    [DynamicData(nameof(NajduziNizIzCsv), DynamicDataSourceType.Property)]
+    public void IzracunajNajduziNiz_HistorijaKvizova_VracaNajduziNizUzastopnihDana(int[] daniUnazad, int ocekivano)
+    {
+        var niz = _servis.IzracunajNajduziNiz(Sesije(daniUnazad));
 
         Assert.AreEqual(ocekivano, niz);
     }

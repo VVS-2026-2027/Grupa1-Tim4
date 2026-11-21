@@ -14,6 +14,11 @@ namespace ezZkvi.Services
             return BrojUzastopnihDanaDo(dani, posljednjiDan);
         }
 
+        public int IzracunajNajduziNiz(IEnumerable<KvizSesija> sesije)
+        {
+            throw new NotImplementedException();
+        }
+
         private static HashSet<DateTime> DaniSaZavrsenimKvizom(IEnumerable<KvizSesija> sesije)
         {
             return sesije
