@@ -22,6 +22,10 @@ namespace ezZkvi.ViewModels
         public int AktivnaSesijaPreostaloSekundi { get; set; }
 
         public bool ImaAktivnuSesiju => AktivnaSesijaId.HasValue && AktivnaSesijaPreostaloSekundi > 0;
+
+        // Niz dana učenja (Task 3, funkcionalnost 1)
+        public int TrenutniNizDana { get; set; }
+        public int NajduziNizDana { get; set; }
     }
 
     public class NedavnaAktivnostViewModel
