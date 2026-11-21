@@ -10,7 +10,7 @@ namespace ezZkvi.Services
     {
         public List<PreporukaOblasti> OblastiZaPonavljanje(IEnumerable<KvizSesijaPitanje> stavke)
         {
-            throw new NotImplementedException();
+            return new List<PreporukaOblasti>();
         }
     }
 }
