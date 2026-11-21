@@ -9,7 +9,7 @@ namespace ezZkvi.Services
     {
         public int IzracunajTrenutniNiz(IEnumerable<KvizSesija> sesije, DateTime danas)
         {
-            throw new NotImplementedException();
+            return 0;
         }
     }
 }
