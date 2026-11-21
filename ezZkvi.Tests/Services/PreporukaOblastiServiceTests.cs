@@ -58,4 +58,18 @@ public sealed class PreporukaOblastiServiceTests
 
         Assert.AreEqual(ocekivanoPreporuceno, preporuke.Any(p => p.OblastId == 1));
     }
+
+    [TestMethod]
+    [TestProperty("Autor", "Imran Čustović")]
+    [TestCategory("Boundary verifier")]
+    [DataRow(4, false, DisplayName = "4 odgovora su premalo")]
+    [DataRow(5, true, DisplayName = "5 odgovora je dovoljno")]
+    public void OblastiZaPonavljanje_BrojOdgovora_TrebaNajmanjePet(int brojNetacnih, bool ocekivanoPreporuceno)
+    {
+        var stavke = Stavke(1, tacnih: 0, netacnih: brojNetacnih);
+
+        var preporuke = _servis.OblastiZaPonavljanje(stavke);
+
+        Assert.AreEqual(ocekivanoPreporuceno, preporuke.Any(p => p.OblastId == 1));
+    }
 }
