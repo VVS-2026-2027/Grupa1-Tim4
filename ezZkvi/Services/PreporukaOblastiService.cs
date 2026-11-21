@@ -9,13 +9,14 @@ namespace ezZkvi.Services
     public class PreporukaOblastiService
     {
         private const int PragTacnosti = 60;
+        private const int MinimalnoOdgovora = 5;
 
         public List<PreporukaOblasti> OblastiZaPonavljanje(IEnumerable<KvizSesijaPitanje> stavke)
         {
             return stavke
                 .GroupBy(s => s.Pitanje!.OblastId)
                 .Select(NapraviPreporuku)
-                .Where(p => p.Tacnost < PragTacnosti)
+                .Where(p => p.BrojOdgovora >= MinimalnoOdgovora && p.Tacnost < PragTacnosti)
                 .ToList();
         }
 
