@@ -56,4 +56,16 @@ public sealed class NizDanaServiceTests
 
         Assert.AreEqual(ocekivano, niz);
     }
+
+    [TestMethod]
+    [TestProperty("Autor", "Imran Čustović")]
+    [TestCategory("Equality verifier")]
+    [DataRow(new[] { 1, 2 }, 2, DisplayName = "Jucer i prekjucer - niz traje")]
+    [DataRow(new[] { 2, 3 }, 0, DisplayName = "Posljednji kviz prije dva dana - niz prekinut")]
+    public void IzracunajTrenutniNiz_DanasJosNemaKviza_NizSeRacunaOdJucer(int[] daniUnazad, int ocekivano)
+    {
+        var niz = _servis.IzracunajTrenutniNiz(Sesije(daniUnazad), Danas);
+
+        Assert.AreEqual(ocekivano, niz);
+    }
 }
